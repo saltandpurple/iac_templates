@@ -3,26 +3,28 @@ import os
 import sys
 import requests
 
-POD_NAME = "vllm-gpu-pod"
-def shutdown_runpod():
+def delete_runpod():
+    pod_name = os.getenv("POD_NAME")
+    if not pod_name:
+        raise ValueError("POD_NAME environment variable is required")
     api_key = os.getenv('RUNPOD_API_KEY')
     if not api_key:
-        sys.exit("Error: RUNPOD_API_KEY environment variable is required.")
+        raise ValueError("RUNPOD_API_KEY environment variable is required")
 
     headers = {"Authorization": f"Bearer {api_key}"}
     pod_id = sys.argv[1] if len(sys.argv) > 1 else None
 
     try:
         if not pod_id:
-            print(f"Searching for pod {POD_NAME}...")
+            print(f"Searching for pod {pod_name}...")
             pods_url = "https://rest.runpod.io/v1/pods"
             resp = requests.get(pods_url, headers=headers)
             resp.raise_for_status()
             pods = resp.json()
 
-            pod = next((p for p in pods if p.get('name') == POD_NAME), None)
+            pod = next((p for p in pods if p.get('name') == pod_name), None)
             if not pod:
-                sys.exit(f"Error: Pod {POD_NAME} not found.")
+                sys.exit(f"Error: Pod {pod_name} not found.")
             pod_id = pod['id']
             print(f"Found pod with ID: {pod_id}")
 

@@ -6,5 +6,7 @@ automate things I do all the time on runpod. Execution is extremely straightforw
 # Do this in a venv, obviously
 pip install -r requirements.txt
 export RUNPOD_API_KEY=YOUR_API_KEY
+export POD_NAME="vllm-gpu-pod" # you can also hardcode this if it's always the same
+
 python3 create_runpod.py # or one of the other scripts
 ```
