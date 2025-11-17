@@ -6,7 +6,7 @@ import requests
 def delete_runpod():
     pod_name = os.getenv("POD_NAME")
     if not pod_name:
-        raise ValueError("POD_NAME environment variable is required")
+        pod_name="default_pod"
     api_key = os.getenv('RUNPOD_API_KEY')
     if not api_key:
         raise ValueError("RUNPOD_API_KEY environment variable is required")
