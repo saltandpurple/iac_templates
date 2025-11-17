@@ -33,7 +33,7 @@ def delete_runpod():
         resp = requests.delete(terminate_url, headers=headers)
         resp.raise_for_status()
 
-        if resp.status_code == 200:
+        if 200 <= resp.status_code < 300:
             print("Pod terminated successfully.")
         else:
             sys.exit(f"Error: Failed to terminate pod. API Message: {resp.status_code}")
@@ -47,4 +47,4 @@ def delete_runpod():
         sys.exit(f"An unexpected error occurred: {e}")
 
 if __name__ == "__main__":
-    shutdown_runpod()
+    delete_runpod()
