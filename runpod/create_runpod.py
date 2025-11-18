@@ -5,6 +5,7 @@ import requests
 from typing import Dict, Any
 
 def create_runpod() -> Dict[str, Any]:
+    pod_name = os.getenv("POD_NAME") if os.getenv("POD_NAME") != "" else "default_pod"
     api_key = os.getenv('RUNPOD_API_KEY')
     if not api_key:
         raise ValueError("RUNPOD_API_KEY environment variable is required")
@@ -24,7 +25,7 @@ def create_runpod() -> Dict[str, Any]:
         "imageName": "vllm/vllm-openai:latest",
         "containerDiskInGb": 40,
         "interruptible": False,  
-        "name": "vllm-gpu-pod",
+        "name": pod_name,
         "ports": ["8000/http","22/tcp"]
     }
     
