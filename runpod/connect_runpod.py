@@ -32,7 +32,7 @@ def connect_runpod():
 
         print(f"Found pod: {pod['id']} at {ip}:{port}")
         print(f"Connecting: ssh root@{ip} -p {port}")
-        os.execvp("ssh", ["ssh", f"root@{ip}", "-p", str(port), "-i", os.path.expanduser("~/.ssh/id_ed25519_runpod")])
+        os.execvp("sshpass", ["sshpass", "-p", "runpod", "ssh", f"root@{ip}", "-p", str(port), "-i", os.path.expanduser("~/.ssh/id_ed25519_runpod")])
 
     except requests.exceptions.RequestException as e:
         error = f"API request failed: {e}"

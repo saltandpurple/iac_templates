@@ -30,4 +30,4 @@ Since it's fiddly to look-up a Runpod's IP manually to SSH into it (and it chang
 ```
 python3 connect_runpod.py <POD_NAME> # pod name is a mandatory param here
 ```
-Defaults to expecting your SSH-key in `~/.ssh/id_ed25519_runpod`, adjust as needed.
+Defaults to expecting your SSH-key in `~/.ssh/id_ed25519_runpod`, adjust as needed. Also uses `sshpass` to provide the default-password (always "runpod") for the SSH connection (actual auth is done via Key, naturally).
