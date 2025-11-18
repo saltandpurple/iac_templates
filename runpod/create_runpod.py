@@ -5,9 +5,7 @@ import requests
 from typing import Dict, Any
 
 def create_runpod() -> Dict[str, Any]:
-    pod_name = os.getenv("POD_NAME")
-    if not pod_name:
-        pod_name="default_pod"
+    pod_name = os.getenv("POD_NAME") if os.getenv("POD_NAME") != "" else "default_pod"
     api_key = os.getenv('RUNPOD_API_KEY')
     if not api_key:
         raise ValueError("RUNPOD_API_KEY environment variable is required")

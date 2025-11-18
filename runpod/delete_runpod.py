@@ -4,15 +4,13 @@ import sys
 import requests
 
 def delete_runpod():
-    pod_name = os.getenv("POD_NAME")
-    if not pod_name:
-        pod_name="default_pod"
     api_key = os.getenv('RUNPOD_API_KEY')
     if not api_key:
         raise ValueError("RUNPOD_API_KEY environment variable is required")
 
     headers = {"Authorization": f"Bearer {api_key}"}
     pod_id = sys.argv[1] if len(sys.argv) > 1 else None
+    pod_name = os.getenv("POD_NAME") if os.getenv("POD_NAME") != "" else "default_pod"
 
     try:
         if not pod_id:
@@ -43,8 +41,6 @@ def delete_runpod():
         if e.response is not None:
             error += f" | Response: {e.response.text}"
         sys.exit(error)
-    except Exception as e:
-        sys.exit(f"An unexpected error occurred: {e}")
 
 if __name__ == "__main__":
     delete_runpod()
