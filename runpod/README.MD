@@ -24,4 +24,10 @@ runpodctl receive some-other-file <ONE_TIME_CODE> # run on the receiving machine
 These commands do not require an API Key but make use of one-time keys. It's pretty neat for quickly transferring some model or whatever between a pod and your machine.
 
 
-# SSH connection script
+## SSH connection 
+Since it's fiddly to look-up a Runpod's IP manually to SSH into it (and it changes on every pod pause/restart, naturally), a small script to automate this as well.
+
+```
+python3 connect_runpod.py <POD_NAME> # pod name is a mandatory param here
+```
+Defaults to expecting your SSH-key in `~/.ssh/id_ed25519_runpod`, adjust as needed.

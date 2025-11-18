@@ -25,12 +25,14 @@ def connect_runpod():
         if not pod:
             sys.exit(f"Error: Pod {pod_name} not found.")
 
-        pod_id = pod['id']
-        print(f"Found pod with ID: {pod_id}")
+        ip = pod.get('publicIp')
+        port = pod.get('portMappings', {}).get('22')
+        if not ip or not port:
+            sys.exit(f"Error: Pod {pod_name} missing publicIp or SSH port mapping.")
 
-        ssh_command = f"ssh {pod_id}@ssh.runpod.io -i /home/saltandpurple/.ssh/id_ed25519_runpod"
-        print(f"Connecting: {ssh_command}")
-        os.execvp("ssh", ["ssh", f"{pod_id}@ssh.runpod.io", "-i", os.path.expanduser("~/.ssh/id_ed25519_runpod")])
+        print(f"Found pod: {pod['id']} at {ip}:{port}")
+        print(f"Connecting: ssh root@{ip} -p {port}")
+        os.execvp("ssh", ["ssh", f"root@{ip}", "-p", str(port), "-i", os.path.expanduser("~/.ssh/id_ed25519_runpod")])
 
     except requests.exceptions.RequestException as e:
         error = f"API request failed: {e}"
