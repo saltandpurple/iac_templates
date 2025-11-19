@@ -1,4 +1,4 @@
-# MLLab Secrets Management
+# Secrets Management
 
 This directory manages secrets for the MLLab cluster using AWS Parameter Store with KMS encryption.
 
@@ -60,9 +60,11 @@ ArgoCD will deploy the ExternalSecret, ESO will read from Parameter Store, and c
 
 ## Path Convention
 
-All secrets use the path prefix `/mllab/` followed by:
+In my examples, all secrets use the path prefix `/mllab/` followed by:
 - `/mllab/{service}/{secret-name}` - Service-specific secrets
 - `/mllab/shared/{secret-name}` - Shared secrets
+
+You can adjust as needed, obviously.
 
 ## Security Model
 

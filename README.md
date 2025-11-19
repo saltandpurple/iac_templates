@@ -9,6 +9,9 @@ While I used all the code in here successfully, this isn't a collection of "gold
 All of the code in here has been used by me and so I consider it to be tested and functional. 
 However, almost all of the Terraform and quite a bit of the non-TF-stuff will require additional configuration (which I usually store in a secret.tf.vars or similar), because I don't want to publicly commit my actual configuration details (for obvious reasons).
 
+## Documentation
+Instead of creating one huge monster-Readme, I opted for dedicated smaller Readmes in the corresponding directories. If a module/component doesn't have one, well, I was probably simply too lazy to write one. Yes, I am available for hire, why do you ask?
+
 ## Warning
-Make sure you understand what you are doing before you apply any of this! When it comes to Terraform (and IaC in general), you can do a lot of damage, and more importantly incur a lot of costs if you spin up random resources. I made sure to spec conservatively wherever applicable but use your own brain.
+Make sure you understand what you are doing before applying any of this. When it comes to Terraform (and IaC in general), you can do a lot of damage with very simple commands and more importantly, incur a lot of costs if you spin up random resources. I made sure to spec conservatively wherever applicable but use your brain.
 
